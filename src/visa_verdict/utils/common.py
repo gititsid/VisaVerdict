@@ -1,8 +1,8 @@
 import sys
 from functools import wraps
 
-from src.project_name.logger import logging
-from src.project_name.exception import CustomException
+from src.visa_verdict.logger import logging
+from src.visa_verdict.exception import CustomException
 
 
 def exception_handler(func: callable) -> callable:

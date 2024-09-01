@@ -1,32 +1,13 @@
-# MLProjectTemplate
-A Data Science project template with MLOps frameworks
+# VisaVerdict
+A Machine Learning project to predict the likelihood of US Visa approval
 
----
-## Setting Up the Project using this template:
-1. Click on `Use this template` -> `create a new repository`
-2. Put your repository name and description -> `create repository`
-3. Clone the repository to your local machine 
-4. Rename/Update:
-   1. `template.py`: update the project name and add more files/folders [Optional]
-   2. the project folder `(src/project_name)` to `(src/YourProjectName)`
-   3. README
-   4. `requirements.txt` with your project dependencies
-   5. `setup.py` with your/your project details
-5. Create a virtual environment using setup.sh:
-    ```
-    bash setup.sh 
-    ```
-6. Activate the virtual environment (optional, if not done in step 6):
-    ```
-    source activate ./venv
-    ``` 
 ----
 ## Workflow:
 1. Update config: `config/config.yaml`
-2. Update the entity: `src/project_name/entity/config_entity.py`
-3. Update the configuration manager: `src/project_name/config/configuration.py`
-4. Update the components: `src/project_name/components`
-5. Update the pipeline: `src/project_name/pipeline`
+2. Update the entity: `src/VisVerdict/entity/config_entity.py`
+3. Update the configuration manager: `src/VisVerdict/config/configuration.py`
+4. Update the components: `src/VisVerdict/components`
+5. Update the pipeline: `src/VisVerdict/pipeline`
 6. Update entry point: `main.py`
 7. Update application: `app.py`
 
@@ -119,6 +100,6 @@ A Data Science project template with MLOps frameworks
 ```
 ---
 
-Owner: [Aashish Kumar](https://www.linktr.ee/heydido)
+Owner: [Siddharth Kumar](https://www.linktr.ee/linkitsid)
 
 ---
