@@ -3,7 +3,9 @@ from src.visa_verdict.utils.common import read_yaml, create_directories
 
 from src.visa_verdict.entity.config_entity import (DataIngestionConfig,
                                                    DataPreprocessingConfig,
-                                                   DataValidationConfig)
+                                                   DataValidationConfig,
+                                                   DataTransformationConfig,
+                                                   ModelTrainingConfig)
 
 
 class ConfigurationManager:
@@ -58,3 +60,34 @@ class ConfigurationManager:
         )
 
         return data_validation_config
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        data_transformation_config = self.config.data_transformation
+
+        create_directories([data_transformation_config.root_dir])
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir=data_transformation_config.root_dir,
+            database=data_transformation_config.database,
+            processed_collection=data_transformation_config.processed_collection,
+            random_state=data_transformation_config.random_state,
+            data_transformer=data_transformation_config.data_transformer
+        )
+
+        return data_transformation_config
+
+    def get_model_training_config(self) -> ModelTrainingConfig:
+        model_training_config = self.config.model_training
+
+        create_directories([model_training_config.root_dir])
+
+        model_training_config = ModelTrainingConfig(
+            root_dir=model_training_config.root_dir,
+            test_size=model_training_config.test_size,
+            random_state=model_training_config.random_state,
+            hyperparameters=model_training_config.hyperparameters,
+            experiment_name=model_training_config.experiment_name,
+            model_path=model_training_config.model_path
+        )
+
+        return model_training_config

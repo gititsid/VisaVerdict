@@ -26,3 +26,22 @@ class DataValidationConfig:
     database: str
     raw_collection: str
     processed_collection: str
+
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    root_dir: Path
+    database: str
+    processed_collection: str
+    random_state: int
+    data_transformer: Path
+
+
+@dataclass(frozen=True)
+class ModelTrainingConfig:
+    root_dir: Path
+    test_size: float
+    random_state: int
+    hyperparameters: dict
+    experiment_name: str
+    model_path: Path
