@@ -13,6 +13,16 @@ class DataIngestionConfig:
 
 @dataclass(frozen=True)
 class DataPreprocessingConfig:
+    root_dir: Path
+    processed_data: str
+    database: str
+    raw_collection: str
+    processed_collection: str
+
+
+@dataclass(frozen=True)
+class DataValidationConfig:
+    root_dir: Path
     database: str
     raw_collection: str
     processed_collection: str

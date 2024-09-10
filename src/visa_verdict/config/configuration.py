@@ -1,7 +1,9 @@
 from src.visa_verdict.constants import *
 from src.visa_verdict.utils.common import read_yaml, create_directories
 
-from src.visa_verdict.entity.config_entity import (DataIngestionConfig)
+from src.visa_verdict.entity.config_entity import (DataIngestionConfig,
+                                                   DataPreprocessingConfig,
+                                                   DataValidationConfig)
 
 
 class ConfigurationManager:
@@ -27,3 +29,32 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+
+    def get_data_preprocessing_config(self) -> DataPreprocessingConfig:
+        data_preprocessing_config = self.config.data_preprocessing
+
+        create_directories([data_preprocessing_config.root_dir])
+
+        data_preprocessing_config = DataPreprocessingConfig(
+            root_dir=data_preprocessing_config.root_dir,
+            processed_data=data_preprocessing_config.processed_data,
+            database=data_preprocessing_config.database,
+            raw_collection=data_preprocessing_config.raw_collection,
+            processed_collection=data_preprocessing_config.processed_collection
+        )
+
+        return data_preprocessing_config
+
+    def get_data_validation_config(self) -> DataValidationConfig:
+        data_validation_config = self.config.data_validation
+
+        create_directories([data_validation_config.root_dir])
+
+        data_validation_config = DataValidationConfig(
+            root_dir=data_validation_config.root_dir,
+            database=data_validation_config.database,
+            raw_collection=data_validation_config.raw_collection,
+            processed_collection=data_validation_config.processed_collection
+        )
+
+        return data_validation_config
