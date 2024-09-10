@@ -1,0 +1,8 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  remote_url: https://github.com/gititsid/Datasets/raw/main/us_visa.csv
+  raw_data_path: artifacts/data_ingestion/data.csv
+  database: visa_verdict
+  raw_collection: raw_data

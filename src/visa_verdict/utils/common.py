@@ -1,5 +1,9 @@
 import os
 import sys
+from pathlib import Path
+
+from box.exceptions import BoxValueError
+from box import ConfigBox
 
 import dill
 import yaml
@@ -53,16 +57,31 @@ def log_handler(func: callable) -> callable:
     return wrapper
 
 
-def read_yaml_file(file_path: str) -> dict:
+def read_yaml(path_to_yaml: Path) -> ConfigBox:
+    """reads yaml file and returns
+
+    Args:
+        path_to_yaml (str): path like input
+
+    Raises:
+        ValueError: if yaml file is empty
+        e: empty file
+
+    Returns:
+        ConfigBox: ConfigBox type
+    """
     try:
-        with open(file_path, "rb") as yaml_file:
-            return yaml.safe_load(yaml_file)
-
+        with open(path_to_yaml) as yaml_file:
+            content = yaml.safe_load(yaml_file)
+            logging.info(f"yaml file: {path_to_yaml} loaded successfully")
+            return ConfigBox(content)
+    except BoxValueError:
+        raise ValueError("yaml file is empty")
     except Exception as e:
-        raise CustomException(e, sys) from e
+        raise e
 
 
-def write_yaml_file(file_path: str, content: object, replace: bool = False) -> None:
+def write_yaml(file_path: str, content: object, replace: bool = False) -> None:
     try:
         if replace:
             if os.path.exists(file_path):
@@ -150,11 +169,31 @@ def drop_columns(df: DataFrame, cols: list) -> DataFrame:
         raise CustomException(e, sys) from e
 
 
-if __name__ == "__main__":
-    @log_handler
-    @exception_handler
-    def division(x, y):
-        return x / y
+def create_directories(dirs: list) -> None:
+    """
+    Create directories if they do not exist
+    dirs: list of directories to be created
+    """
+    logging.info("Entered create_directories method of utils")
 
-    print(division(10, 2))
-    print(division(10, 0))
+    try:
+        for directory in dirs:
+            os.makedirs(directory, exist_ok=True)
+
+        logging.info("Exited the create_directories method of utils")
+
+    except Exception as e:
+        raise CustomException(e, sys) from e
+
+
+def get_size(path: Path) -> str:
+    """get size in KB
+
+    Args:
+        path (Path): path of the file
+
+    Returns:
+        str: size in KB
+    """
+    size_in_kb = round(os.path.getsize(path)/1024)
+    return f"~ {size_in_kb} KB"

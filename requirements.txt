@@ -3,12 +3,17 @@ pandas
 matplotlib
 seaborn
 plotly
+
 jupyter
+
 pymongo
+
 imblearn
 catboost
 scikit-learn
 xgboost
+
+python-dotenv
 from_root
 dill
 PyYAML
@@ -17,6 +22,8 @@ fastapi
 uvicorn
 jinja2
 python-multipart
+python-box
+
 mlflow
 dvc
 dagshub
