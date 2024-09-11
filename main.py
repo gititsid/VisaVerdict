@@ -49,7 +49,7 @@ try:
     logging.info(f">>>>>> stage '{STAGE_NAME}' started <<<<<<")
 
     data_validator = DataValidationPipeline()
-    data_validator.main()
+    validated = data_validator.main()
 
     logging.info(f">>>>>> stage '{STAGE_NAME}' completed <<<<<<\n")
 
@@ -57,64 +57,67 @@ except Exception as e:
     logging.error(f"Error occurred while running {STAGE_NAME}!")
     raise CustomException(e, sys)
 
+if validated:
 
-STAGE_NAME = "Data Transformation"
+    STAGE_NAME = "Data Transformation"
 
-try:
-    logging.info(f">>>>>> stage '{STAGE_NAME}' started <<<<<<")
+    try:
+        logging.info(f">>>>>> stage '{STAGE_NAME}' started <<<<<<")
 
-    data_transformer = DataTransformationPipeline()
-    x, y = data_transformer.main()
+        data_transformer = DataTransformationPipeline()
+        x, y = data_transformer.main()
 
-    logging.info(f">>>>>> stage '{STAGE_NAME}' completed <<<<<<\n")
+        logging.info(f">>>>>> stage '{STAGE_NAME}' completed <<<<<<\n")
 
-except Exception as e:
-    logging.error(f"Error occurred while running {STAGE_NAME}!")
-    raise CustomException(e, sys)
-
-
-STAGE_NAME = "Model Training"
-
-try:
-    logging.info(f">>>>>> stage '{STAGE_NAME}' started <<<<<<")
-
-    model_trainer_ = ModelTrainingPipeline()
-
-    model_trainer_.main(x_data=x, y_data=y)
-    x_train, x_test, y_train, y_test = model_trainer_.model_trainer.train_test_split(x, y)
-
-    logging.info(f">>>>>> stage '{STAGE_NAME}' completed <<<<<<\n")
-
-except Exception as e:
-    logging.error(f"Error occurred while running {STAGE_NAME}!")
-    raise CustomException(e, sys)
+    except Exception as e:
+        logging.error(f"Error occurred while running {STAGE_NAME}!")
+        raise CustomException(e, sys)
 
 
-STAGE_NAME = "Model Evaluation"
+    STAGE_NAME = "Model Training"
 
-try:
-    logging.info(f">>>>>> stage '{STAGE_NAME}' started <<<<<<")
+    try:
+        logging.info(f">>>>>> stage '{STAGE_NAME}' started <<<<<<")
 
-    model_evaluator = ModelEvaluationPipeline()
-    train_accuracy_score, train_f1_score, test_accuracy_score, test_f1_score = model_evaluator.main(
-        x_train, x_test, y_train, y_test
-    )
+        model_trainer_ = ModelTrainingPipeline()
 
-    print(
-        json.dumps(
-            {
-                "train_accuracy_score": train_accuracy_score,
-                "train_f1_score": train_f1_score,
-                "test_accuracy_score": test_accuracy_score,
-                "test_f1_score": test_f1_score
-            },
-            indent=4
+        model_trainer_.main(x_data=x, y_data=y)
+        x_train, x_test, y_train, y_test = model_trainer_.model_trainer.train_test_split(x, y)
+
+        logging.info(f">>>>>> stage '{STAGE_NAME}' completed <<<<<<\n")
+
+    except Exception as e:
+        logging.error(f"Error occurred while running {STAGE_NAME}!")
+        raise CustomException(e, sys)
+
+
+    STAGE_NAME = "Model Evaluation"
+
+    try:
+        logging.info(f">>>>>> stage '{STAGE_NAME}' started <<<<<<")
+
+        model_evaluator = ModelEvaluationPipeline()
+        train_accuracy_score, train_f1_score, test_accuracy_score, test_f1_score = model_evaluator.main(
+            x_train, x_test, y_train, y_test
         )
-    )
 
-    logging.info(f">>>>>> stage '{STAGE_NAME}' completed <<<<<<\n")
-    logging.info(">>>>>> Rural Credit Predictor Pipeline completed <<<<<<")
+        print(
+            json.dumps(
+                {
+                    "train_accuracy_score": train_accuracy_score,
+                    "train_f1_score": train_f1_score,
+                    "test_accuracy_score": test_accuracy_score,
+                    "test_f1_score": test_f1_score
+                },
+                indent=4
+            )
+        )
 
-except Exception as e:
-    logging.error(f"Error occurred while running {STAGE_NAME}!")
-    raise CustomException(e, sys)
+        logging.info(f">>>>>> stage '{STAGE_NAME}' completed <<<<<<\n")
+        logging.info(">>>>>> Visa Verdict Predictor Pipeline completed <<<<<<")
+
+    except Exception as e:
+        logging.error(f"Error occurred while running {STAGE_NAME}!")
+        raise CustomException(e, sys)
+else:
+    raise Exception("Data Validation failed!")
