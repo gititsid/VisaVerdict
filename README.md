@@ -100,6 +100,6 @@ A Machine Learning project to predict the likelihood of US Visa approval
 ```
 ---
 
-Owner: [Siddharth Kumar](https://www.linktr.ee/linkitsid)
+Project Owner: [Siddharth Kumar](https://www.linktr.ee/linkitsid)
 
 ---
