@@ -32,8 +32,8 @@ model_training:
   test_size: 0.2
   random_state: 42
   hyperparameters:
-    - n_estimators: 100
-    - max_depth: 5
+    - n_estimators: 200
+    - max_depth: 20
   experiment_name: RandomForestClassifier
   model_path: artifacts/model_training/model.pkl
 
