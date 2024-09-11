@@ -11,15 +11,12 @@ STAGE_NAME = "Data Preprocessing"
 
 class DataPreprocessingPipeline:
     def __init__(self):
-        pass
+        self.config_manager = ConfigurationManager()
+        self.data_preprocessing_config = self.config_manager.get_data_preprocessing_config()
+        self.data_preprocessing = DataPreprocessing(config=self.data_preprocessing_config)
 
-    @staticmethod
-    def main():
-        config_manager = ConfigurationManager()
-        data_preprocessing_config = config_manager.get_data_preprocessing_config()
-        data_preprocessing = DataPreprocessing(config=data_preprocessing_config)
-
-        data_preprocessing.main()
+    def main(self):
+        self.data_preprocessing.main()
 
 
 if __name__ == '__main__':

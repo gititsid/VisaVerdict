@@ -15,15 +15,13 @@ STAGE_NAME = "Model Evaluation"
 
 class ModelEvaluationPipeline:
     def __init__(self):
-        pass
+        self.config_manager = ConfigurationManager()
+        self.model_evaluation_config = self.config_manager.get_model_evaluation_config()
+        self.model_evaluation = ModelEvaluation(config=self.model_evaluation_config)
 
-    @staticmethod
-    def main(x_train, y_train, x_test, y_test):
-        config_manager = ConfigurationManager()
-        model_evaluation_config = config_manager.get_model_evaluation_config()
-        model_evaluation = ModelEvaluation(config=model_evaluation_config)
+    def main(self, x_train, y_train, x_test, y_test):
 
-        train_accuracy_score, train_f1_score, test_accuracy_score, test_f1_score = model_evaluation.main(
+        train_accuracy_score, train_f1_score, test_accuracy_score, test_f1_score = self.model_evaluation.main(
             x_train, y_train, x_test, y_test
         )
 

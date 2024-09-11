@@ -11,15 +11,12 @@ STAGE_NAME = "Data Ingestion"
 
 class DataIngestionPipeline:
     def __init__(self):
-        pass
+        self.config_manager = ConfigurationManager()
+        self.data_ingestion_config = self.config_manager.get_data_ingestion_config()
+        self.data_ingestion = DataIngestion(config=self.data_ingestion_config)
 
-    @staticmethod
-    def main():
-        config_manager = ConfigurationManager()
-        data_ingestion_config = config_manager.get_data_ingestion_config()
-        data_ingestion = DataIngestion(config=data_ingestion_config)
-
-        data_ingestion.main()
+    def main(self):
+        self.data_ingestion.main()
 
 
 if __name__ == '__main__':

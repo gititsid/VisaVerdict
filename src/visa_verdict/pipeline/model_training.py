@@ -16,13 +16,8 @@ class ModelTrainingPipeline:
         self.model_training_config = self.config_manager.get_model_training_config()
         self.model_trainer = ModelTrainer(config=self.model_training_config)
 
-    @staticmethod
-    def main(x_data, y_data):
-        config_manager = ConfigurationManager()
-        model_training_config = config_manager.get_model_training_config()
-        model_trainer = ModelTrainer(config=model_training_config)
-
-        model_trainer.main(x_data, y_data)
+    def main(self, x_data, y_data):
+        self.model_trainer.main(x_data, y_data)
 
 
 if __name__ == '__main__':

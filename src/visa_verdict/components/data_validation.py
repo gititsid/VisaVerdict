@@ -25,6 +25,8 @@ class DataValidation:
         try:
             logging.info("Performing Data Validation...")
 
+            validation_status = False
+
             raw_df = raw_client.read_all_as_df()
             processed_df = processed_client.read_all_as_df()
 
@@ -40,7 +42,8 @@ class DataValidation:
 
             if valid_raw_data and valid_processed_data and all_rows_exist:
                 logging.info("Data Validation Passed!")
-                return True
+                validation_status = True
+                return validation_status
             else:
                 logging.error(
                     "Data Validation Failed. Status: valid_raw_data: {}, valid_processed_data: {}, all_rows_exist: {}"
@@ -50,14 +53,15 @@ class DataValidation:
                         all_rows_exist
                     )
                 )
-                raise CustomException("Data Validation Failed!", sys)
+                return validation_status
 
         except Exception as e:
             logging.error(f"Error occurred during Data Validation! Error: {e}")
             raise CustomException(e, sys)
 
     def main(self):
-        self.validate_data()
+        val_status = self.validate_data()
+        return val_status
 
 
 if __name__ == "__main__":
