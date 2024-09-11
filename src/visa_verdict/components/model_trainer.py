@@ -56,6 +56,9 @@ class ModelTrainer:
             logging.error(f"Error training model!")
             raise CustomException(e, sys)
 
+    def main(self, x_data: np.array, y_data: np.array):
+        self.train_model(x_data, y_data)
+
 
 if __name__ == "__main__":
     data_transformation_config = ConfigurationManager().get_data_transformation_config()
@@ -65,4 +68,4 @@ if __name__ == "__main__":
     x_data, y_data = data_transformer.main()
 
     model_trainer = ModelTrainer(model_training_config)
-    model_trainer.train_model(x_data, y_data)
+    model_trainer.main(x_data, y_data)
