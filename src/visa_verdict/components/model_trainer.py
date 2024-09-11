@@ -17,7 +17,7 @@ class ModelTrainer:
     def __init__(self, config: ModelTrainingConfig):
         self.config = config
 
-    def _train_test_split(self, x_data: np.array, y_data: np.array) -> tuple[np.array, np.array, np.array, np.array]:
+    def train_test_split(self, x_data: np.array, y_data: np.array) -> tuple[np.array, np.array, np.array, np.array]:
         try:
             logging.info("Splitting data into training and testing sets:")
 
@@ -40,7 +40,7 @@ class ModelTrainer:
         try:
             logging.info("Training model:")
 
-            x_train, x_test, y_train, y_test = self._train_test_split(x_data, y_data)
+            x_train, x_test, y_train, y_test = self.train_test_split(x_data, y_data)
 
             hyperparameters = {k: v for d in list(self.config.hyperparameters) for k, v in d.items()}
             rfc = RandomForestClassifier(**hyperparameters)

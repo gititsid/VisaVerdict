@@ -36,3 +36,10 @@ model_training:
     - max_depth: 5
   experiment_name: RandomForestClassifier
   model_path: artifacts/model_training/model.pkl
+
+model_evaluation:
+    root_dir: artifacts/model_evaluation
+    data_transformer: artifacts/data_transformation/data_transformer.pkl
+    model_path: artifacts/model_training/model.pkl
+    train_metrics: artifacts/model_evaluation/train_metrics.json
+    test_metrics: artifacts/model_evaluation/test_metrics.json

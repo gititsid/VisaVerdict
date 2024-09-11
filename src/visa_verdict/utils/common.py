@@ -5,7 +5,8 @@ from pathlib import Path
 from box.exceptions import BoxValueError
 from box import ConfigBox
 
-import dill
+import pickle
+import json
 import yaml
 import numpy as np
 from pandas import DataFrame
@@ -90,7 +91,19 @@ def write_yaml(file_path: str, content: object, replace: bool = False) -> None:
         with open(file_path, "w") as file:
             yaml.dump(content, file)
     except Exception as e:
-        raise CustomException(e, sys) from e
+        raise CustomException(e, sys)
+
+
+def write_json(file_path: str, content: object, replace: bool = False) -> None:
+    try:
+        if replace:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "w") as file:
+            json.dump(content, file, indent=4)
+    except Exception as e:
+        raise CustomException(e, sys)
 
 
 def load_object(file_path: str) -> object:
@@ -99,7 +112,7 @@ def load_object(file_path: str) -> object:
     try:
 
         with open(file_path, "rb") as file_obj:
-            obj = dill.load(file_obj)
+            obj = pickle.load(file_obj)
 
         logging.info("Exited the load_object method of utils")
 
@@ -143,7 +156,7 @@ def save_object(file_path: str, obj: object) -> None:
     try:
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         with open(file_path, "wb") as file_obj:
-            dill.dump(obj, file_obj)
+            pickle.dump(obj, file_obj)
 
         logging.info("Exited the save_object method of utils")
 

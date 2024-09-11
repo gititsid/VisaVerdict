@@ -45,3 +45,13 @@ class ModelTrainingConfig:
     hyperparameters: dict
     experiment_name: str
     model_path: Path
+
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    data_transformer: Path
+    model_path: Path
+    train_metrics: Path
+    test_metrics: Path
+

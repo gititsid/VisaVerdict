@@ -5,7 +5,8 @@ from src.visa_verdict.entity.config_entity import (DataIngestionConfig,
                                                    DataPreprocessingConfig,
                                                    DataValidationConfig,
                                                    DataTransformationConfig,
-                                                   ModelTrainingConfig)
+                                                   ModelTrainingConfig,
+                                                   ModelEvaluationConfig)
 
 
 class ConfigurationManager:
@@ -91,3 +92,18 @@ class ConfigurationManager:
         )
 
         return model_training_config
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        model_evaluation_config = self.config.model_evaluation
+
+        create_directories([model_evaluation_config.root_dir])
+
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=model_evaluation_config.root_dir,
+            data_transformer=model_evaluation_config.data_transformer,
+            model_path=model_evaluation_config.model_path,
+            train_metrics=model_evaluation_config.train_metrics,
+            test_metrics=model_evaluation_config.test_metrics
+        )
+
+        return model_evaluation_config
