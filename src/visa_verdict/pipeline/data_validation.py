@@ -11,15 +11,13 @@ STAGE_NAME = "Data Validation"
 
 class DataValidationPipeline:
     def __init__(self):
-        pass
+        self.config_manager = ConfigurationManager()
+        self.data_validation_config = self.config_manager.get_data_validation_config()
+        self.data_validation = DataValidation(config=self.data_validation_config)
 
-    @staticmethod
-    def main():
-        config_manager = ConfigurationManager()
-        data_validation_config = config_manager.get_data_validation_config()
-        data_validation = DataValidation(config=data_validation_config)
-
-        data_validation.main()
+    def main(self):
+        validation_status = self.data_validation.main()
+        return validation_status
 
 
 if __name__ == '__main__':

@@ -11,15 +11,12 @@ STAGE_NAME = "Data Transformation"
 
 class DataTransformationPipeline:
     def __init__(self):
-        pass
+        self.config_manager = ConfigurationManager()
+        self.data_transformation_config = self.config_manager.get_data_transformation_config()
+        self.data_transformation = DataTransformation(config=self.data_transformation_config)
 
-    @staticmethod
-    def main():
-        config_manager = ConfigurationManager()
-        data_transformation_config = config_manager.get_data_transformation_config()
-        data_transformation = DataTransformation(config=data_transformation_config)
-
-        x, y = data_transformation.main()
+    def main(self):
+        x, y = self.data_transformation.main()
 
         return x, y
 
