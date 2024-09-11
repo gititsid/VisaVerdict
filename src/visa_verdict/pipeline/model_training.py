@@ -12,7 +12,9 @@ STAGE_NAME = "Model Training"
 
 class ModelTrainingPipeline:
     def __init__(self):
-        pass
+        self.config_manager = ConfigurationManager()
+        self.model_training_config = self.config_manager.get_model_training_config()
+        self.model_trainer = ModelTrainer(config=self.model_training_config)
 
     @staticmethod
     def main(x_data, y_data):

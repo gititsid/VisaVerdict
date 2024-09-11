@@ -19,7 +19,9 @@ class DataTransformationPipeline:
         data_transformation_config = config_manager.get_data_transformation_config()
         data_transformation = DataTransformation(config=data_transformation_config)
 
-        data_transformation.main()
+        x, y = data_transformation.main()
+
+        return x, y
 
 
 if __name__ == '__main__':
