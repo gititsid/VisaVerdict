@@ -6,7 +6,8 @@ from src.visa_verdict.entity.config_entity import (DataIngestionConfig,
                                                    DataValidationConfig,
                                                    DataTransformationConfig,
                                                    ModelTrainingConfig,
-                                                   ModelEvaluationConfig)
+                                                   ModelEvaluationConfig,
+                                                   PredictionConfig)
 
 
 class ConfigurationManager:
@@ -107,3 +108,14 @@ class ConfigurationManager:
         )
 
         return model_evaluation_config
+
+    def get_prediction_config(self) -> PredictionConfig:
+        prediction_config = self.config.prediction
+
+        prediction_config = PredictionConfig(
+            root_dir=prediction_config.root_dir,
+            data_transformer=prediction_config.data_transformer,
+            model_path=prediction_config.model_path
+        )
+
+        return prediction_config

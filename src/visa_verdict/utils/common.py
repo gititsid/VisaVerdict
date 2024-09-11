@@ -106,7 +106,7 @@ def write_json(file_path: str, content: object, replace: bool = False) -> None:
         raise CustomException(e, sys)
 
 
-def load_object(file_path: str) -> object:
+def load_object(file_path: str):
     logging.info("Entered the load_object method of utils")
 
     try:

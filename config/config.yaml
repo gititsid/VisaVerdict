@@ -43,3 +43,8 @@ model_evaluation:
     model_path: artifacts/model_training/model.pkl
     train_metrics: artifacts/model_evaluation/train_metrics.json
     test_metrics: artifacts/model_evaluation/test_metrics.json
+
+prediction:
+    root_dir: artifacts/prediction
+    data_transformer: artifacts/data_transformation/data_transformer.pkl
+    model_path: artifacts/model_training/model.pkl
