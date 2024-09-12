@@ -39,7 +39,7 @@ class Prediction:
 class CustomData:
     def __init__(
             self, continent, education_of_employee, has_job_experience, requires_job_training, no_of_employees,
-            region_of_employment, prevailing_wage, unit_of_wage, full_time_position, case_status, company_age
+            region_of_employment, prevailing_wage, unit_of_wage, full_time_position, company_age
     ):
         self.continent = continent
         self.education_of_employee = education_of_employee
@@ -50,7 +50,6 @@ class CustomData:
         self.prevailing_wage = prevailing_wage
         self.unit_of_wage = unit_of_wage
         self.full_time_position = full_time_position
-        self.case_status = case_status
         self.company_age = company_age
 
         self.custom_data = {
@@ -63,7 +62,6 @@ class CustomData:
             "prevailing_wage": self.prevailing_wage,
             "unit_of_wage": self.unit_of_wage,
             "full_time_position": self.full_time_position,
-            "case_status": self.case_status,
             "company_age": self.company_age
         }
 
@@ -91,7 +89,6 @@ if __name__ == "__main__":
         prevailing_wage=592.2029,
         unit_of_wage="Hour",
         full_time_position="Y",
-        case_status="Denied",
         company_age=17
     )
 

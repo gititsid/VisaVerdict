@@ -39,7 +39,6 @@ if __name__ == '__main__':
             prevailing_wage=592.2029,
             unit_of_wage="Hour",
             full_time_position="Y",
-            case_status="Denied",
             company_age=17
         )
 
